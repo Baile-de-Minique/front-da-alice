@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import Login from "./screens/login.tsx"
 import { ChakraProvider } from "@chakra-ui/react"
 import GenerateQRCode from "./screens/GenerateQRCode.tsx"
+import PatientInfos from "./screens/PatientInfos.tsx"
 
 const router = createBrowserRouter([
 	{
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
 	{
 		path: "/qr-code",
 		element: <GenerateQRCode />,
+	},
+	{
+		path: "/patient",
+		element: <PatientInfos />,
 	},
 ])
 
