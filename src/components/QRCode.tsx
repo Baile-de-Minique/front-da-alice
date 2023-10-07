@@ -1,5 +1,3 @@
-import QRCode from "react-qr-code"
-
 interface QRCodeProps {
 	value: string
 }

@@ -1,13 +1,17 @@
 import { Button } from "@chakra-ui/react"
 import jsPDF from "jspdf"
 
-function GeneratePDF() {
+interface GeneratePDFProps {
+	value: string
+}
+
+function GeneratePDF({ value }: GeneratePDFProps) {
 	function generate() {
 		const doc = new jsPDF()
 
 		const htmlString = `
 			<div style="display:flex; justify-content: center; text-align: center; flex-direction: column; gap: 3rem">
-				<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=alice"/>
+				<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${value}"/>
 				<h1 style="text-align: center;">Baixe o aplicativo UniSaúde e escaneie esse QR Code !</h1>
 			</div>
 		`
