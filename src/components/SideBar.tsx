@@ -1,5 +1,5 @@
 import { Heading } from "@chakra-ui/react"
-import { QrCode } from "phosphor-react"
+import { QrCode, User } from "phosphor-react"
 import { Link } from "react-router-dom"
 
 function SideBar() {
@@ -22,7 +22,7 @@ function SideBar() {
 					</Link>
 				</div>
 				<div className="flex gap-2 items-center">
-					<QrCode size={24} className="text-white" weight="fill" />
+					<User size={24} className="text-white" weight="fill" />
 					<Link to="/patient" className="text-white">
 						Lista Pacientes
 					</Link>

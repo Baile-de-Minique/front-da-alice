@@ -8,6 +8,9 @@ import { ChakraProvider } from "@chakra-ui/react"
 import GenerateQRCode from "./screens/GenerateQRCode.tsx"
 import PatientInfos from "./screens/PatientInfos.tsx"
 
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+
 const router = createBrowserRouter([
 	{
 		path: "/",
@@ -26,6 +29,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
 		<ChakraProvider>
+			<ToastContainer />
 			<RouterProvider router={router} />
 		</ChakraProvider>
 	</React.StrictMode>

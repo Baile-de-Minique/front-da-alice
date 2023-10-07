@@ -1,9 +1,57 @@
 import { MagnifyingGlass } from "phosphor-react"
 import SideBar from "../components/SideBar"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import PatientInfoField from "../components/PatientInfoField"
+
+interface PatientInfo {
+	type: string
+	value: string
+}
 
 function PatientInfos() {
-	const [pacientInfos, setPacientInfos] = useState([])
+	const [patientInfos, setPatientInfos] = useState<PatientInfo[]>([
+		{
+			type: "",
+			value: "",
+		},
+	])
+
+	useEffect(() => {
+		setPatientInfos([
+			{
+				type: "Nome",
+				value: "João Gabriel Pinho da Cruz",
+			},
+			{
+				type: "CPF",
+				value: "123.456.789-10",
+			},
+			{
+				type: "RG",
+				value: "123456789",
+			},
+			{
+				type: "Data de Nascimento",
+				value: "01/01/2000",
+			},
+			{
+				type: "Sexo",
+				value: "Masculino",
+			},
+			{
+				type: "Endereço",
+				value: "Rua dos Bobos, 0",
+			},
+			{
+				type: "Telefone",
+				value: "(00) 00000-0000",
+			},
+			{
+				type: "E-mail",
+				value: "email@email.com",
+			},
+		])
+	})
 
 	return (
 		<div className="flex">
@@ -21,13 +69,20 @@ function PatientInfos() {
 				</div>
 				<div
 					className={`flex flex-col ${
-						pacientInfos.length === 0 ? "justify-center" : ""
+						patientInfos.length === 0 ? "justify-center" : ""
 					} mb-20 h-[60vh] bg-gray-100 rounded-md px-2 py-2 w-[60vw] overflow-y-scroll`}
 				>
-					{pacientInfos.length === 0 ? (
+					{patientInfos.length === 0 ? (
 						<p className="text-center">Os dados do paciente aparecerão aqui!</p>
 					) : (
-						<div>infos</div>
+						<div className="flex flex-col gap-3">
+							{patientInfos.map((patientInfo) => (
+								<PatientInfoField
+									type={patientInfo.type}
+									value={patientInfo.value}
+								/>
+							))}
+						</div>
 					)}
 				</div>
 			</div>
