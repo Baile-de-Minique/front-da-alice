@@ -7,7 +7,10 @@ interface QRCodeProps {
 function QRCodeComponent({ value }: QRCodeProps) {
 	return (
 		<div>
-			<QRCode size={256} value={value} id="qr-code-gen" />
+			<img
+				src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${value}`}
+				className="w-52 h-52"
+			/>
 		</div>
 	)
 }

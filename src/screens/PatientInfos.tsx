@@ -1,4 +1,4 @@
-import { MagnifyingGlass } from "phosphor-react"
+import { CircleNotch, MagnifyingGlass } from "phosphor-react"
 import SideBar from "../components/SideBar"
 import { useEffect, useState } from "react"
 import PatientInfoField from "../components/PatientInfoField"
@@ -12,13 +12,9 @@ interface PatientInfo {
 }
 
 function PatientInfos() {
+	const [loading, setLoading] = useState(false)
 	const [patientName, setPatientName] = useState("")
-	const [patientInfos, setPatientInfos] = useState<PatientInfo[]>([
-		{
-			type: "",
-			value: "",
-		},
-	])
+	const [patientInfos, setPatientInfos] = useState<PatientInfo[]>([])
 
 	function submitPatientName() {
 		console.log(patientName)
@@ -84,13 +80,18 @@ function PatientInfos() {
 						onChange={(ev) => {
 							setPatientName(ev.target.value)
 						}}
+						placeholder="João Gabriel Pinho da Cruz"
 					/>
-					<MagnifyingGlass
-						size={32}
-						className="cursor-pointer text-[#7161ef]"
-						weight="fill"
-						onClick={submitPatientName}
-					/>
+					{loading ? (
+						<CircleNotch size={32} className="text-[#7161ef] animate-spin" />
+					) : (
+						<MagnifyingGlass
+							size={32}
+							className="cursor-pointer text-[#7161ef]"
+							weight="fill"
+							onClick={submitPatientName}
+						/>
+					)}
 				</div>
 				<div className="flex flex-col gap-6">
 					<div
@@ -111,7 +112,14 @@ function PatientInfos() {
 							</div>
 						)}
 					</div>
-					<Button colorScheme="purple" className="w-min" onClick={copyAllToClipboard}>
+					<Button
+						style={{
+							display: patientInfos.length === 0 ? "none" : "block",
+						}}
+						colorScheme="purple"
+						className="w-min"
+						onClick={copyAllToClipboard}
+					>
 						Copiar tudo
 					</Button>
 				</div>
