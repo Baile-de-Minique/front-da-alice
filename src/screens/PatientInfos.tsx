@@ -17,8 +17,10 @@ function PatientInfos() {
 	const [patientName, setPatientName] = useState("")
 	const [patientInfos, setPatientInfos] = useState<PatientInfo[]>([])
 
-	function submitPatientName() {
-		console.log(patientName)
+	async function submitPatientName() {
+		setLoading(true)
+		setPatientInfos([...getPatientByName(patientName)])
+		setLoading(false)
 	}
 
 	async function copyAllToClipboard() {
@@ -31,10 +33,6 @@ function PatientInfos() {
 			autoClose: 300,
 		})
 	}
-
-	useEffect(() => {
-		setPatientInfos(getPatientByName("João"))
-	}, [])
 
 	return (
 		<div className="flex">

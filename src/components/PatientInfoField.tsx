@@ -19,7 +19,7 @@ function PatientInfoField({ type, value }: PatientInfoFieldProps) {
 	return (
 		<span className="flex gap-3 items-center bg-[#b79ced] text-white justify-between rounded-sm">
 			<div className="flex gap-3 items-center">
-				<span className="py-2 px-2 w-60 bg-[#957fef] rounded-sm">{type}:</span>
+				<span className="py-2 px-2 w-60 bg-[#957fef] rounded-sm">{type}</span>
 				<span className="py-2">{value}</span>
 			</div>
 			<span title="Copiar!" onClick={copyToClipboard}>
