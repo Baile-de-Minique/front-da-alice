@@ -7,13 +7,44 @@ import {
 	InputGroup,
 	InputRightElement,
 } from "@chakra-ui/react"
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 import MedV from "../assets/medv.svg"
+import { toast } from "react-toastify"
+
+interface LoginInfos {
+	email: string
+	password: string
+}
 
 function Login() {
 	const [show, setShow] = useState(false)
+	const [loginInfos, setLoginInfos] = useState<LoginInfos | null>(null)
+	const formRef = useRef<HTMLFormElement>(null)
 	const handleClick = () => setShow(!show)
+
+	async function submitForm() {
+		if (formRef.current) {
+			const formData = new FormData(formRef.current)
+			const email = formData.get("email") as string
+			const password = formData.get("password") as string
+
+			setLoginInfos({
+				email,
+				password,
+			})
+		}
+
+		localStorage.setItem("loginInfos", JSON.stringify(loginInfos))
+		toast("Login efetuado com sucesso!", {
+			type: "success",
+			position: "top-left",
+			autoClose: 1000,
+		})
+		setTimeout(() => {
+			window.location.href = "/patient"
+		}, 1000)
+	}
 
 	return (
 		<div className="grid grid-cols-2 h-screen">
@@ -30,13 +61,14 @@ function Login() {
 				<img src={MedV} alt="MedV" className="w-2/3" />
 			</div>
 			<div className="flex items-center justify-center">
-				<form action="" className="flex flex-col gap-6 w-2/3">
+				<form className="flex flex-col gap-6 w-2/3" ref={formRef}>
 					<Heading size="lg" textAlign="center">
 						Faça seu login!
 					</Heading>
 					<FormControl>
 						<FormLabel>Email</FormLabel>
 						<Input
+							name="email"
 							type="email"
 							placeholder="email@email.com"
 							focusBorderColor="#7161ef"
@@ -44,6 +76,7 @@ function Login() {
 					</FormControl>
 					<InputGroup size="md">
 						<Input
+							name="password"
 							pr="4.5rem"
 							type={show ? "text" : "password"}
 							placeholder="Coloque sua senha"
@@ -55,7 +88,9 @@ function Login() {
 							</Button>
 						</InputRightElement>
 					</InputGroup>
-					<Button colorScheme="purple">Entrar</Button>
+					<Button colorScheme="purple" onClick={submitForm}>
+						Entrar
+					</Button>
 				</form>
 			</div>
 		</div>
